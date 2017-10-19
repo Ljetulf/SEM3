@@ -1,24 +1,19 @@
 #include <stdio.h>
 #include <string.h>
 
-// mas -> massiv? ... array
-const long int SIZEOFMAS=1000;
-// fixit: пробелы вокруг бинарных операторов
-
-// dilimeters - их массив, а не одно значение
+const long int SIZEOFARRAY = 1000;
+//не забыть пофиксить dilimiters-должен быть массив
 int split(char* string, const char* delimiter, char** words)
 {
-    int number=0;
-    int i=0;
-    
-    // лишние скобки: if (!string || !delimiter || !words)
-    if ((!string)||(!delimiter)||(!words))
+    int number = 0;
+    int i = 0;
+    if (!string || !delimiter || !words)
         return 0;
-    char* symb=strtok(string, delimiter);
-    while (symb!=NULL)
+    char* symb = strtok(string, delimiter);
+    while (symb != NULL)
     {
-        words[i++]=symb;
-        symb=strtok(NULL, delimiter);
+        words[i++] = symb;
+        symb = strtok(NULL, delimiter);
         number++;
     }
     return number;
@@ -29,28 +24,26 @@ int main()
     char* word;
     char* dels;
     char** wordi;
-    word=(char *) malloc(sizeof(char)*SIZEOFMAS);
-    dels=(char *) malloc(sizeof(char)*SIZEOFMAS);
-    wordi=(char **) malloc(sizeof(word)*SIZEOFMAS);
+    word = (char *) malloc(sizeof(char) * SIZEOFARRAY);
+    dels = (char *) malloc(sizeof(char) * SIZEOFARRAY);
+    wordi = (char **) malloc(sizeof(word) * SIZEOFARRAY);
     printf("Write your word:");
-    scanf("%s",word);
+    scanf("%s", word);
     printf("Write your delimiters:");
-    scanf("%s",dels);
-    printf("Count of your words: %d\n",split(word,dels,wordi));
-    char** buf=wordi;
-    printf("Your words:");
-    
-    // fixit: нет никакой гарантии, что у вас массив wordi будет инициализирован NULL'ами
-    // либо сами явно иницилизируйте, либо с помощью for выводите, т.к. знаете же число слов в строке
+    scanf("%s", dels);
+    printf("Count of your words: %d\n", split(word, dels, wordi));
+    char** buf = (char **) malloc(sizeof(char) * SIZEOFARRAY);
+    for (int i = 0, i < sizeof(word) * SIZEOFARRAY, i++) 
+	buf[i] = wordi[i];
+    printf("Your words:");    
     while (*buf)
     {
         printf("%s\n",*buf);
         buf++;
     }
-    
-    // не обязательно к void* приводить здесь
-    free((void*)wordi);
-    free((void*)word);
-    free((void*)dels);
+    free(wordi);
+    free(word);
+    free(dels);
+    free(buf);
     return 0;
 }
