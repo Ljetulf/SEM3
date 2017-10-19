@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 const long int SIZEOFARRAY = 1000;
@@ -33,9 +34,9 @@ int main()
     scanf("%s", dels);
     printf("Count of your words: %d\n", split(word, dels, wordi));
     char** buf = (char **) malloc(sizeof(char) * SIZEOFARRAY);
-    for (int i = 0, i < sizeof(word) * SIZEOFARRAY, i++) 
+    for (int i = 0; i < sizeof(word) * SIZEOFARRAY; i++) 
 	buf[i] = wordi[i];
-    printf("Your words:");    
+    printf("Your words:\n");    
     while (*buf)
     {
         printf("%s\n",*buf);
@@ -44,6 +45,5 @@ int main()
     free(wordi);
     free(word);
     free(dels);
-    free(buf);
     return 0;
 }
